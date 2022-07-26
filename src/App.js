@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+
+import { Amplify, Auth } from "aws-amplify";
+import awsmobile from "./aws-exports";
+
+import User from "./User";
+import UserNot from "./UserNot";
+
+import "primereact/resources/themes/saga-blue/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
+
+Amplify.configure(awsmobile);
 
 function App() {
+  const { isUser, setIsUser } = useState(false);
+
+  useEffect(() => {
+    Auth.currentAuthenticatedUser().then((use) => {
+      use ? setIsUser(true) : setIsUser(false);
+    });
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      {isUser && <User />}
+      {!isUser && <UserNot />}
+    </React.Fragment>
   );
 }
 

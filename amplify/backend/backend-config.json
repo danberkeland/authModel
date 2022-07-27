@@ -1,13 +1,15 @@
 {
   "auth": {
-    "authmodel45184835": {
+    "authmodel66592de2": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
         "socialProviders": [],
-        "usernameAttributes": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
         "signupAttributes": [
           "EMAIL"
         ],

@@ -9,6 +9,7 @@ import { Splash } from "./Auth/Splash";
 import { UserApplyForm } from "./Auth/UserApplyForm";
 import { UserResetPassword } from "./Auth/UserResetPassword";
 import User from "./User";
+import Nav from "./Nav";
 
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -19,8 +20,7 @@ import { UserApplyThanks } from "./Auth/UserApplyThanks";
 Amplify.configure(awsmobile);
 
 function App2() {
-  const { setFormType, formType } =
-    useContext(UserContext);
+  const { setFormType, formType } = useContext(UserContext);
 
   useEffect(() => {
     checkUser();
@@ -29,11 +29,14 @@ function App2() {
 
   const checkUser = async () => {
     try {
-      const user = await Auth.currentAuthenticatedUser();
-      console.log(user);
-      if (user) {
-        setFormType("signedIn");
-      }
+      const user = await Auth.currentAuthenticatedUser().then((use) => {
+        console.log(use);
+        if (use) {
+          setFormType("signedIn");
+        } else {
+          setFormType("onNoUser");
+        }
+      });
     } catch (err) {
       // console.log(err)
     }
@@ -52,13 +55,14 @@ function App2() {
   };
 
   return (
-    <div class="card">
-      <div class="card-container yellow-container">
-        <div class="flex flex-column">
+    <div className="card">
+      <div className="card-container yellow-container">
+        <div className="flex flex-column">
+          {formType === "signedIn" && <Nav />}
+          {formType === "signedIn" && <User />}
           {formType === "onNoUser" && <Splash />}
           {formType === "Apply" && <UserApplyForm />}
           {formType === "resetPassword" && <UserResetPassword />}
-          {formType === "signedIn" && <User />}
           {formType === "Thankyou" && <UserApplyThanks />}
         </div>
       </div>

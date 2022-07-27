@@ -17,7 +17,7 @@ export const UserProvider = (props) => {
     const [ user, setUser ] = useState()
     const [ authType, setAuthType ] = useState(0);
     const [formData, setFormData] = useState(initialFormState);
-    const [formType, setFormType] = useState("onNoUser");
+    const [formType, setFormType] = useState("");
 
     
  

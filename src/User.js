@@ -3,7 +3,7 @@ import React from "react";
 import CustomerNews from "./pages/CustomerNews/CustomerNews";
 import Ordering from "./pages/Ordering/Ordering";
 import Products from "./pages/Products/Products";
-import Settings from "./pages/Settings/Settings";
+import Users from "./pages/Settings/Users";
 
 import { useContext } from "react";
 import { Auth } from "aws-amplify";
@@ -29,7 +29,7 @@ function User() {
           <Route path="/CustomerNews" element={<CustomerNews />} />
           <Route path="/Ordering" element={<Ordering />} />
           <Route path="/Products" element={<Products />} />
-          <Route path="/Settings" element={<Settings />} />
+          <Route path="/Settings" element={<Users />} />
         </Routes>
       </div>
     </Router>

@@ -2,20 +2,9 @@
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
 
-type AuthType @model {
-    sub: String! @primaryKey(sortKeyFields: ["loc"])
-    loc: String!
-    authType: String!
-}
-
-type User @model {
+type requests @model {
     id: ID!
-    name: String!
-    sub: String!
+    userName: String!
+    loc: String!
 }
 
-type Location @model {
-    locNick: String! @primaryKey
-    locName: String!
-    subs: [ String ]
-}

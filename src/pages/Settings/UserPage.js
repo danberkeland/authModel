@@ -4,6 +4,8 @@ import { UserPageContext } from "./UserPageContext";
 
 import ByLocation from "./Parts/ByLocation";
 import ByUser from "./Parts/ByUser";
+import Requested from "./Parts/Requested";
+
 
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -69,6 +71,9 @@ const UserPage = () => {
             </TabPanel>
             <TabPanel header="By Location &nbsp;" rightIcon="pi pi-map">
               <ByLocation setVisible={setVisible} dis={true} />
+            </TabPanel>
+            <TabPanel header="REQUESTED &nbsp;" rightIcon="pi pi-map">
+              <Requested setVisible={setVisible} dis={true} />
             </TabPanel>
             
           </TabView>

@@ -14,7 +14,7 @@ const ListWrapper = styled.div`
   background: #ffffff;
 `;
 
-const ByUser = () => {
+const Requested = () => {
   const { userList, setSelectedUserList, user, setUser } =
     useContext(UserPageContext);
 
@@ -22,7 +22,7 @@ const ByUser = () => {
     <ListWrapper>
       <ScrollPanel>
         <DataTable
-          value={userList.filter((use) => use.userName === user.userName)}
+          value={userList.filter((use) => use.sub === "REQUESTED")}
           className="p-datatable-striped"
           selectionMode="single"
           selection={user.userName}
@@ -56,4 +56,4 @@ const ByUser = () => {
   );
 };
 
-export default ByUser;
+export default Requested;

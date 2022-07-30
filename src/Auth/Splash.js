@@ -72,12 +72,9 @@ export const Splash = () => {
     console.log("data", data);
     await Auth.signIn(data.email, data.password)
       .then((use) => {
-        setUser(use);
         if (use.challengeName === "NEW_PASSWORD_REQUIRED") {
           setFormType("resetPassword");
-        } else {
-          setFormType("signedIn");
-        }
+        } 
       })
       .catch((error) => {
         if (error) {

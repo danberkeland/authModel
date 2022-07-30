@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from "react";
 
 import { Amplify, Auth, Hub } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import awsmobile from "./aws-exports";
 
 import { UserContext } from "./Auth/UserContext";
@@ -16,24 +17,47 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 
 import { UserApplyThanks } from "./Auth/UserApplyThanks";
+import { getLocationUser, getUser } from "./customGraphQL/queries";
 
 Amplify.configure(awsmobile);
 
 function App2() {
-  const { setFormType, formType, authType, setUser, user } = useContext(UserContext);
+  const {
+    setFormType,
+    formType,
+    authType,
+    setUser,
+    userDetails,
+    setUserDetails,
+  } = useContext(UserContext);
 
   useEffect(() => {
     checkUser();
     setAuthListener();
   }, []);
 
+  const fetchUserDetails = async (sub) => {
+    console.log("sub", sub);
+    try {
+      const user = await API.graphql(graphqlOperation(getUser, { sub: sub }));
+      let info = user.data.getUser;
+
+      setUserDetails({
+        userName: info.name,
+        sub: info.sub,
+      });
+    } catch (error) {
+      console.log("error on fetching Cust List", error);
+    }
+  };
+
   const checkUser = async () => {
     try {
       const user = await Auth.currentAuthenticatedUser().then((use) => {
-        setUser(use)
-        console.log("User",use);
+        setUser(use);
+        console.log("User", use);
         if (use) {
-          
+          fetchUserDetails(use.username);
           setFormType("signedIn");
         } else {
           setFormType("onNoUser");
@@ -50,6 +74,12 @@ function App2() {
         case "signOut":
           setFormType("onNoUser");
           break;
+        case "signIn":
+          console.log("payload", data.payload.data)
+          setUser(data.payload.data)
+          fetchUserDetails(data.payload.data.username);
+          setFormType("signedIn")
+          break
         default:
           break;
       }
@@ -60,13 +90,14 @@ function App2() {
     <div className="card">
       <div className="card-container yellow-container">
         <div className="flex flex-column">
-          {user && user.attributes.email}
-          {formType === "signedIn" && 
+          Welcome {userDetails.userName}. Location: {userDetails.chosen},
+          Authtype: {authType}
+          {formType === "signedIn" && (
             <React.Fragment>
               <Nav />
               <User />
             </React.Fragment>
-          }
+          )}
           {formType === "onNoUser" && <Splash />}
           {formType === "Apply" && <UserApplyForm />}
           {formType === "resetPassword" && <UserResetPassword />}

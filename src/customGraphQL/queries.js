@@ -18,3 +18,28 @@ export const listLocationUsers = /* GraphQL */ `
     }
   }
 `;
+
+export const getUser = /* GraphQL */ `
+  query GetUser($sub: String!) {
+    getUser(sub: $sub) {
+      name
+      email
+      phone
+      sub
+      locs {
+        items {
+          id
+          locationID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+

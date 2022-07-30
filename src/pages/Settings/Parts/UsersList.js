@@ -1,13 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { API, graphqlOperation } from "aws-amplify";
 
 import styled from "styled-components";
 
 import { UserPageContext } from "../UserPageContext";
 
+import { listLocationUsers } from "../../../customGraphQL/listCustomerLocSub";
+
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { ScrollPanel } from "primereact/scrollpanel";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
+import { UserContext } from "../../../Auth/UserContext";
 
 const ListWrapper = styled.div`
   font-family: "Montserrat", sans-serif;
@@ -16,6 +20,8 @@ const ListWrapper = styled.div`
 `;
 
 const UsersList = () => {
+  const { setAuthType, userDetails, setUserDetails, chosen, setChosen } =
+    useContext(UserContext);
   const { userList, user, setUser } = useContext(UserPageContext);
 
   const [filters, setFilters] = useState({
@@ -23,6 +29,17 @@ const UsersList = () => {
     loc: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
 
+  useEffect(() => {
+    /*
+    console.log("chosen", chosen);
+    console.log("sub", userDetails.sub);
+    (chosen && userDetails) && API.graphql(
+      graphqlOperation(listLocationUsers, {
+        filter: { locationID: { eq: chosen }, userID: { eq: userDetails.sub } },
+      })
+    ).then(sub => console.log("sub2",sub));
+    */
+  }, [chosen]);
 
   return (
     <ListWrapper>
@@ -33,8 +50,12 @@ const UsersList = () => {
           selectionMode="single"
           selection={user.userName}
           onSelectionChange={(e) => {
-            console.log("setUser",e)
-            setUser(e.value)}}
+            console.log("setUser", e);
+            setChosen(e.value.loc)
+            setUserDetails({ ...userDetails, chosen: e.value.loc });
+            setAuthType(e.value.authType);
+            setUser(e.value);
+          }}
           dataKey="id"
           filterDisplay="row"
           filters={filters}
@@ -53,7 +74,6 @@ const UsersList = () => {
             filter
             filterPlaceholder="location"
           ></Column>
-          
         </DataTable>
       </ScrollPanel>
     </ListWrapper>

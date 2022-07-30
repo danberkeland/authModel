@@ -24,8 +24,6 @@ const UsersList = () => {
   });
 
 
-  let { chosen, setChosen } = useContext(UserPageContext);
-
   return (
     <ListWrapper>
       <ScrollPanel>
@@ -34,7 +32,9 @@ const UsersList = () => {
           className="p-datatable-striped"
           selectionMode="single"
           selection={user.userName}
-          onSelectionChange={(e) => setUser(e.value)}
+          onSelectionChange={(e) => {
+            console.log("setUser",e)
+            setUser(e.value)}}
           dataKey="id"
           filterDisplay="row"
           filters={filters}

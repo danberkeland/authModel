@@ -20,7 +20,7 @@ import { UserApplyThanks } from "./Auth/UserApplyThanks";
 Amplify.configure(awsmobile);
 
 function App2() {
-  const { setFormType, formType } = useContext(UserContext);
+  const { setFormType, formType, authType } = useContext(UserContext);
 
   useEffect(() => {
     checkUser();
@@ -58,8 +58,12 @@ function App2() {
     <div className="card">
       <div className="card-container yellow-container">
         <div className="flex flex-column">
-          {formType === "signedIn" && <Nav />}
-          {formType === "signedIn" && <User />}
+          {formType === "signedIn" && 
+            <React.Fragment>
+              <Nav />
+              <User />
+            </React.Fragment>
+          }
           {formType === "onNoUser" && <Splash />}
           {formType === "Apply" && <UserApplyForm />}
           {formType === "resetPassword" && <UserResetPassword />}

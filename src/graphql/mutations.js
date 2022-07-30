@@ -1,48 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createAuthType = /* GraphQL */ `
-  mutation CreateAuthType(
-    $input: CreateAuthTypeInput!
-    $condition: ModelAuthTypeConditionInput
-  ) {
-    createAuthType(input: $input, condition: $condition) {
-      sub
-      loc
-      authType
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateAuthType = /* GraphQL */ `
-  mutation UpdateAuthType(
-    $input: UpdateAuthTypeInput!
-    $condition: ModelAuthTypeConditionInput
-  ) {
-    updateAuthType(input: $input, condition: $condition) {
-      sub
-      loc
-      authType
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteAuthType = /* GraphQL */ `
-  mutation DeleteAuthType(
-    $input: DeleteAuthTypeInput!
-    $condition: ModelAuthTypeConditionInput
-  ) {
-    deleteAuthType(input: $input, condition: $condition) {
-      sub
-      loc
-      authType
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const createLocation = /* GraphQL */ `
   mutation CreateLocation(
     $input: CreateLocationInput!

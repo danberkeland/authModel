@@ -1,45 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getAuthType = /* GraphQL */ `
-  query GetAuthType($sub: String!, $loc: String!) {
-    getAuthType(sub: $sub, loc: $loc) {
-      sub
-      loc
-      authType
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listAuthTypes = /* GraphQL */ `
-  query ListAuthTypes(
-    $sub: String
-    $loc: ModelStringKeyConditionInput
-    $filter: ModelAuthTypeFilterInput
-    $limit: Int
-    $nextToken: String
-    $sortDirection: ModelSortDirection
-  ) {
-    listAuthTypes(
-      sub: $sub
-      loc: $loc
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
-      items {
-        sub
-        loc
-        authType
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
 export const getLocation = /* GraphQL */ `
   query GetLocation($locNick: String!) {
     getLocation(locNick: $locNick) {
@@ -200,6 +161,8 @@ export const getLocationUser = /* GraphQL */ `
     }
   }
 `;
+
+
 export const listLocationUsers = /* GraphQL */ `
   query ListLocationUsers(
     $filter: ModelLocationUserFilterInput

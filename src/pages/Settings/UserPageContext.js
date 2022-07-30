@@ -1,4 +1,7 @@
 import React, { useState, createContext, useEffect } from "react";
+import { API, graphqlOperation } from "aws-amplify";
+import { listLocationUsers } from "../../customGraphQL/queries";
+
 
 export const UserPageContext = createContext();
 
@@ -44,35 +47,35 @@ const requests = [
 ];
 
 export const UserPageProvider = (props) => {
-  const [userList, setUserList] = useState([{ userName: "", loc: "" }]);
+  const [userList, setUserList] = useState([{ userName: "", loc: "", sub: "" }]);
   const [user, setUser] = useState({ userName: "", loc: "" });
 
   useEffect(() => {
-    let users = [];
-    for (let loc of locations) {
-      let subList = loc.subs;
-      for (let sub of subList) {
-        console.log(sub, loc.loc);
-        let ind = userIDs.findIndex((use) => use.userID === sub);
-        let name = userIDs[ind].userName;
-        let newUser = {
-          userName: name,
-          loc: loc.loc,
-          sub: sub,
-        };
-        users.push(newUser);
-      }
+    fetchCustomers()
+},[])
+
+
+
+const fetchCustomers = async () => {
+    try{
+      const userList = await API.graphql(graphqlOperation(listLocationUsers , {
+            limit: '1000'
+            }))   
+      let userArray = userList.data.listLocationUsers.items.map(use => ({
+        userName: use.user.name,
+        loc: use.location.locName,
+        sub: use.user.sub,
+        authType: use.authType     
+      }))  
+      console.log(userArray) 
+    
+      setUserList(userArray)
+      
+    } catch (error){
+      console.log('error on fetching Cust List', error)
     }
-    for (let req of requests) {
-      let newReq = {
-        userName: req.userName,
-        loc: req.loc,
-        sub: "REQUESTED",
-      };
-      users.push(newReq);
-    }
-    setUserList(users);
-  }, []);
+  }
+
 
   return (
     <UserPageContext.Provider

@@ -43,8 +43,9 @@ export const UserResetPassword = () => {
     console.log("data", data);
     await Auth.completeNewPassword(user, data.newPassword).then((use) => {
     console.log(use)
-
+    setFormType("onNoUser")
     }
+    
   );
   };
 

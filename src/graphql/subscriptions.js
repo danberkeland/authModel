@@ -1,39 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateAuthType = /* GraphQL */ `
-  subscription OnCreateAuthType {
-    onCreateAuthType {
-      sub
-      loc
-      authType
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateAuthType = /* GraphQL */ `
-  subscription OnUpdateAuthType {
-    onUpdateAuthType {
-      sub
-      loc
-      authType
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteAuthType = /* GraphQL */ `
-  subscription OnDeleteAuthType {
-    onDeleteAuthType {
-      sub
-      loc
-      authType
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreateLocation = /* GraphQL */ `
   subscription OnCreateLocation {
     onCreateLocation {

@@ -50,6 +50,13 @@ const ByUser = () => {
             filter
             filterPlaceholder="UserID"
           ></Column>
+          <Column
+            field="authType"
+            header="authType"
+            sortable
+            filter
+            filterPlaceholder="authType"
+          ></Column>
         </DataTable>
       </ScrollPanel>
     </ListWrapper>

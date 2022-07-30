@@ -3,7 +3,7 @@ import { Amplify, Auth } from "aws-amplify";
 
 import { Form, Field } from "react-final-form";
 
-import { UserContext } from "./UserContext";
+import { UserContext } from "../Contexts/UserContext";
 
 import { Button } from "primereact/button";
 import { Password } from "primereact/password";
@@ -99,9 +99,9 @@ export const UserResetPassword = () => {
             ></i>
             <h5>Registration Successful!</h5>
             <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
-              Your account is registered under name <b>{formData.name}</b> ;
+              Your account is registered under name 
               it'll be valid next 30 days without activation. Please check{" "}
-              <b>{formData.email}</b> for activation instructions.
+              <b></b>for activation instructions.
             </p>
           </div>
         </Dialog>

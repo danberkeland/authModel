@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App2 from "./App2";
 import reportWebVitals from "./reportWebVitals";
-import { UserProvider } from "./Auth/UserContext";
+import { UserProvider } from "./Contexts/UserContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

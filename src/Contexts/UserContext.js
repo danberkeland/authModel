@@ -15,12 +15,11 @@ const initialFormState = {
 export const UserProvider = (props) => {
 
     const [ user, setUser ] = useState()
-    const [ userDetails, setUserDetails ] = useState({
-        userName: "",
-        sub: ""
-    })
-    const [ chosen, setChosen ] = useState('')
-    const [ authType, setAuthType ] = useState(0);
+    
+    const [ chosen, setChosen ] = useState({
+        locName: '',
+        locNick: ''
+    });
     const [formData, setFormData] = useState(initialFormState);
     const [formType, setFormType] = useState();
 
@@ -30,9 +29,7 @@ export const UserProvider = (props) => {
         <UserContext.Provider 
             value={{    
                 user, setUser,
-                userDetails, setUserDetails,
                 chosen, setChosen,
-                authType, setAuthType,
                 formData, setFormData,
                 formType, setFormType
             }}>

@@ -9,7 +9,7 @@ import { useContext } from "react";
 import { Auth } from "aws-amplify";
 
 import { Button } from "primereact/button";
-import { UserContext } from "./Auth/UserContext";
+import { UserContext } from "./Contexts/UserContext";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 

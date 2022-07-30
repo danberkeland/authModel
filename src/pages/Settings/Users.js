@@ -5,15 +5,15 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 
 
-import { UserPageProvider } from "./UserPageContext";
+import { SettingsProvider } from "../../Contexts/SettingsContext.tsx";
 import UserPage from "./UserPage";
 
 const Users = () => {
   
   return (
-    <UserPageProvider>
+    <SettingsProvider>
       <UserPage />
-    </UserPageProvider>
+    </SettingsProvider>
   );
 };
 

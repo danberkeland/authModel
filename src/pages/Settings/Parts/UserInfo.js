@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { UserPageContext } from "../UserPageContext";
+import { UserPageContext } from "../../../Contexts/SettingsContext";
 
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";

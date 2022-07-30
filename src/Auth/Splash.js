@@ -11,7 +11,7 @@ import { classNames } from "primereact/utils";
 import "./Splash.css";
 
 import { CenteredContainer, Title } from "../CommonStyles";
-import { UserContext } from "./UserContext";
+import { UserContext } from "../Contexts/UserContext";
 
 const validate = (data) => {
   let errors = {};

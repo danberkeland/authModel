@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 
 import styled from "styled-components";
 
-import { UserPageContext } from "../UserPageContext";
+import { SettingsContext } from "../../../Contexts/SettingsContext.tsx";
 
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -16,7 +16,7 @@ const ListWrapper = styled.div`
 
 const ByLocation = () => {
   const { userList, setSelectedUserList, user, setUser } =
-    useContext(UserPageContext);
+    useContext(SettingsContext);
 
   return (
     <ListWrapper>

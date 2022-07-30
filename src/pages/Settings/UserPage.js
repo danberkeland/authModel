@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import { UserPageContext } from "./UserPageContext";
+import { SettingsContext } from "../../Contexts/SettingsContext.tsx";
 
 import ByLocation from "./Parts/ByLocation";
 import ByUser from "./Parts/ByUser";
@@ -42,7 +42,7 @@ const UserPage = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
  
-  let { chosen, setChosen } = useContext(UserPageContext);
+  let { chosen, setChosen } = useContext(SettingsContext);
 
 
   return (

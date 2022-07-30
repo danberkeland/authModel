@@ -4,7 +4,7 @@ import { Amplify, Auth, Hub } from "aws-amplify";
 import { API, graphqlOperation } from "aws-amplify";
 import awsmobile from "./aws-exports";
 
-import { UserContext } from "./Auth/UserContext";
+import { UserContext } from "./Contexts/UserContext";
 
 import { Splash } from "./Auth/Splash";
 import { UserApplyForm } from "./Auth/UserApplyForm";
@@ -36,21 +36,7 @@ function App2() {
     setAuthListener();
   }, []);
 
-  const fetchUserDetails = async (sub) => {
-    console.log("sub", sub);
-    try {
-      const user = await API.graphql(graphqlOperation(getUser, { sub: sub }));
-      let info = user.data.getUser;
-
-      setUserDetails({
-        userName: info.name,
-        sub: info.sub,
-      });
-    } catch (error) {
-      console.log("error on fetching Cust List", error);
-    }
-  };
-
+  
   const checkUser = async () => {
     try {
       const user = await Auth.currentAuthenticatedUser().then((use) => {
@@ -67,6 +53,22 @@ function App2() {
       // console.log(err)
     }
   };
+
+  const fetchUserDetails = async (sub) => {
+    console.log("sub", sub);
+    try {
+      const user = await API.graphql(graphqlOperation(getUser, { sub: sub }));
+      let info = user.data.getUser;
+
+      setUserDetails({
+        userName: info.name,
+        sub: info.sub,
+      });
+    } catch (error) {
+      console.log("error on fetching Cust List", error);
+    }
+  };
+
 
   const setAuthListener = () => {
     Hub.listen("auth", (data) => {

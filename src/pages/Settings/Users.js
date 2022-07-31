@@ -5,7 +5,7 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 
 
-import { SettingsProvider } from "../../Contexts/SettingsContext.tsx";
+import { SettingsProvider } from "../../Contexts/SettingsContext.js";
 import UserPage from "./UserPage";
 
 const Users = () => {

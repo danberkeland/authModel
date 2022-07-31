@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 
-import { SettingsContext } from "../../Contexts/SettingsContext.tsx";
+import { SettingsContext } from "../../Contexts/SettingsContext.js";
 
 import ByLocation from "./Parts/ByLocation";
 import ByUser from "./Parts/ByUser";

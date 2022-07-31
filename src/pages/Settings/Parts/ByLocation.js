@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 
 import styled from "styled-components";
 
-import { SettingsContext } from "../../../Contexts/SettingsContext.tsx";
+import { SettingsContext } from "../../../Contexts/SettingsContext.js";
 
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";

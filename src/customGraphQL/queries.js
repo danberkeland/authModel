@@ -9,6 +9,7 @@ export const listLocationUsers = /* GraphQL */ `
         authType
         location {
           locName
+          locNick
         }
         user {
           name

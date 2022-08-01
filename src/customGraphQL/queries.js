@@ -6,10 +6,14 @@ export const listLocationUsers = /* GraphQL */ `
   ) {
     listLocationUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        authType
         location {
-          locName
+          subs {
+            items {
+              userID
+            }
+          }
           locNick
+          locName
         }
         user {
           name
@@ -43,4 +47,41 @@ export const getUser = /* GraphQL */ `
   }
 `;
 
-
+export const listAuth = /* GraphQL */ `
+  query ListLocationUsers(
+    $filter: ModelLocationUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listLocationUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        authType
+        id
+        locationID
+        userID
+        location {
+          locName
+          locNick
+          subs {
+            items {
+              userID
+            }
+          }
+          createdAt
+          updatedAt
+        }
+        user {
+          name
+          email
+          phone
+          sub
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

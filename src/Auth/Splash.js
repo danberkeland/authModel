@@ -11,7 +11,7 @@ import { classNames } from "primereact/utils";
 import "./Splash.css";
 
 import { CenteredContainer, Title } from "../CommonStyles";
-import { UserContext } from "../Contexts/UserContext";
+import { SettingsContext } from "../Contexts/SettingsContext";
 
 const validate = (data) => {
   let errors = {};
@@ -40,7 +40,7 @@ const getFormErrorMessage = (meta) => {
 export const Splash = () => {
   const [showMessage, setShowMessage] = useState(false);
 
-  const { formData, setFormType, setUser } = useContext(UserContext);
+  const { formData, setFormType, setUser } = useContext(SettingsContext);
 
   const dialogFooter = (
     <div className="flex justify-content-center">

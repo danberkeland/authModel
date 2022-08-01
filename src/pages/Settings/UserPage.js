@@ -1,6 +1,4 @@
-import React, { useContext, useState } from "react";
-
-import { SettingsContext } from "../../Contexts/SettingsContext.js";
+import React, { useState, useContext } from "react";
 
 import ByLocation from "./Parts/ByLocation";
 import ByUser from "./Parts/ByUser";
@@ -17,10 +15,12 @@ import { Card } from "primereact/card";
 import { TabView, TabPanel } from "primereact/tabview";
 import { ScrollPanel } from "primereact/scrollpanel";
 import { Button } from "primereact/button";
+import { Auth } from "aws-amplify";
 
 import UsersList from "./Parts/UsersList";
 
 import styled from "styled-components";
+import { SettingsContext } from "../../Contexts/SettingsContext";
 
 const MainWrapper = styled.div`
   float: left;
@@ -41,12 +41,15 @@ const UserPage = () => {
   const [visible, setVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
- 
-  let { chosen, setChosen } = useContext(SettingsContext);
+  const { setFormType } = useContext(SettingsContext);
 
-
+  
+  const signOut = async () => {
+    await Auth.signOut().then((e) => setFormType("onNoUser"));
+  }
   return (
     <MainWrapper>
+     
       <UsersList />
       <Sidebar
         visible={visible}
@@ -59,7 +62,9 @@ const UserPage = () => {
           <ByUser setVisible={setVisible} dis={false} />
         </ScrollPanel>
       </Sidebar>
+
       <InfoWrapper>
+      <Button onClick={signOut}>Sign Out</Button>
         <Button className="p-button-outlined" label="Create New User"></Button>
         <Card>
           <TabView

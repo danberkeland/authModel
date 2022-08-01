@@ -6,9 +6,10 @@ import awsmobile from "./aws-exports";
 
 import { SettingsContext } from "./Contexts/SettingsContext";
 
-//import { Splash } from "./Auth/Splash";
-//import { UserApplyForm } from "./Auth/UserApplyForm";
-//import { UserResetPassword } from "./Auth/UserResetPassword";
+import { Splash } from "./Auth/Splash";
+import { UserApplyForm } from "./Auth/UserApplyForm";
+import { UserResetPassword } from "./Auth/UserResetPassword";
+import { UserApplyThanks } from "./Auth/UserApplyThanks";
 import UserPage from "./pages/Settings/UserPage";
 import Nav from "./Nav";
 
@@ -16,7 +17,7 @@ import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 
-//import { UserApplyThanks } from "./Auth/UserApplyThanks";
+
 import { getUser } from "./customGraphQL/queries";
 
 Amplify.configure(awsmobile);
@@ -29,6 +30,7 @@ export function App() {
     formType,
     authType,
     setUser,
+    chosen
   } = useContext(SettingsContext);
 
   useEffect(() => {
@@ -88,7 +90,7 @@ export function App() {
     <div className="card">
       <div className="card-container yellow-container">
         <div className="flex flex-column">
-          Welcome {userDetails.userName}. Location: {userDetails.chosen}.
+          Welcome {userDetails.userName}. Location: {userDetails.locName}.
           Authtype: {authType}.
           {formType === "signedIn" && (
             <React.Fragment>
@@ -96,12 +98,12 @@ export function App() {
               <UserPage />
             </React.Fragment>
           )}
-          {/*
+          
           {formType === "onNoUser" && <Splash />}
           {formType === "Apply" && <UserApplyForm />}
           {formType === "resetPassword" && <UserResetPassword />}
           {formType === "Thankyou" && <UserApplyThanks />}
-          */}
+         
         </div>
       </div>
     </div>

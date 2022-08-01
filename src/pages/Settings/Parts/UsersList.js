@@ -4,13 +4,12 @@ import { API, graphqlOperation } from "aws-amplify";
 import styled from "styled-components";
 
 import { SettingsContext } from "../../../Contexts/SettingsContext.js";
-
-import { listLocationUsers } from "../../../customGraphQL/listCustomerLocSub";
+import { listAuth } from "../../../customGraphQL/queries.js";
 
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { ScrollPanel } from "primereact/scrollpanel";
-import { FilterMatchMode, FilterOperator } from "primereact/api";
+import { FilterMatchMode } from "primereact/api";
 
 const ListWrapper = styled.div`
   font-family: "Montserrat", sans-serif;
@@ -36,15 +35,25 @@ const UsersList = () => {
   });
 
   useEffect(() => {
-    /*
-    console.log("chosen", chosen);
-    console.log("sub", userDetails.sub);
-    (chosen && userDetails) && API.graphql(
-      graphqlOperation(listLocationUsers, {
-        filter: { locationID: { eq: chosen }, userID: { eq: userDetails.sub } },
-      })
-    ).then(sub => console.log("sub2",sub));
-    */
+    console.log("chosen", chosen.locNick);
+    console.log("sub", userDetails);
+    try {
+      API.graphql(
+        graphqlOperation(listAuth, {
+          filter: {
+            locationID: { eq: chosen.locNick },
+            userID: { eq: userDetails.sub },
+          },
+        })
+      )
+        .then((sub) => {
+          console.log("authTypeSub", sub);
+          setAuthType(sub.data.listLocationUsers.items[0].authType);
+        })
+        .catch((err) => setAuthType(0));
+    } catch (err) {
+      console.log(err);
+    }
   }, [chosen]);
 
   return (
@@ -57,10 +66,15 @@ const UsersList = () => {
           selection={user.userName}
           onSelectionChange={(e) => {
             console.log("setUser", e);
-            setChosen(e.value.loc);
-            setUserDetails({ ...userDetails, chosen: e.value.loc });
-            setAuthType(e.value.authType);
-            setUser(e.value);
+            setChosen({
+              locName: e.value.loc,
+              locNick: e.value.locNick,
+            });
+            setUserDetails({
+              ...userDetails,
+              locName: e.value.loc,
+              locNick: e.value.locNick,
+            });
           }}
           dataKey="id"
           filterDisplay="row"
@@ -74,7 +88,7 @@ const UsersList = () => {
             filterPlaceholder="user"
           ></Column>
           <Column
-            field="loc"
+            field="locName"
             header="Location"
             sortable
             filter

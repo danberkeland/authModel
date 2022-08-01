@@ -3,7 +3,7 @@ import { Amplify, Auth } from "aws-amplify";
 
 import { Form, Field } from "react-final-form";
 
-import { UserContext } from "../Contexts/UserContext";
+import { SettingsContext } from "../Contexts/SettingsContext";
 
 import { Button } from "primereact/button";
 import { Password } from "primereact/password";
@@ -17,7 +17,7 @@ import { CenteredContainer, Title } from "../CommonStyles";
 
 export const UserResetPassword = () => {
   const [showMessage, setShowMessage] = useState(false);
-  const { formData, setFormData, setFormType, user } = useContext(UserContext);
+  const { formData, setFormType, user } = useContext(SettingsContext);
 
   const validate = (data) => {
     let errors = {};

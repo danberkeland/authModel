@@ -11,13 +11,13 @@ import { classNames } from "primereact/utils";
 import "./Splash.css";
 
 import { CenteredContainer, Title } from "../CommonStyles";
-import { UserContext } from "../Contexts/UserContext";
+import { SettingsContext } from "../Contexts/SettingsContext";
 
 export const UserApplyForm = () => {
   const [showMessage, setShowMessage] = useState(false);
   const [formData, setFormData] = useState({});
 
-  const { setFormType } = useContext(UserContext)
+  const { setFormType } = useContext(SettingsContext)
 
   const validate = (data) => {
     let errors = {};

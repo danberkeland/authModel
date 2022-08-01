@@ -15,18 +15,18 @@ const ListWrapper = styled.div`
 `;
 
 const ByLocation = () => {
-  const { userList, setSelectedUserList, user, setUser } =
+  const { userList, userDetails, setUserDetails } =
     useContext(SettingsContext);
 
   return (
     <ListWrapper>
       <ScrollPanel>
         <DataTable
-          value={userList.filter((use) => use.loc === user.loc)}
+          value={userList.filter((use) => use.locNick === userDetails.locNick)}
           className="p-datatable-striped"
           selectionMode="single"
-          selection={user.userName}
-          onSelectionChange={(e) => setUser(e.value)}
+          selection={userDetails.userName}
+          onSelectionChange={(e) => setUserDetails(...userDetails, e.value)}
           dataKey="id"
         >
           <Column
@@ -37,11 +37,18 @@ const ByLocation = () => {
             filterPlaceholder="user"
           ></Column>
           <Column
-            field="loc"
+            field="locName"
             header="Location"
             sortable
             filter
             filterPlaceholder="location"
+          ></Column>
+          <Column
+            field="locNick"
+            header="Nickname"
+            sortable
+            filter
+            filterPlaceholder="nickname"
           ></Column>
           <Column
             field="sub"

@@ -28,20 +28,21 @@ export const SettingsProvider = (props) => {
       userName: "",
       locName: "",
       locNick: "",
-      sub: "",
-    },
+      sub: ""
+    }
   ]);
   const [userDetails, setUserDetails] = useState({
     userName: "",
     sub: "",
     locName: "",
     locNick: "",
-    authType: 0,
   });
+
+  const [ authType, setAuthType ] = useState(0)
 
   useEffect(() => {
     fetchCustomers();
-  }, []);
+  }, [userDetails]);
 
   const fetchCustomers = async () => {
     try {
@@ -52,12 +53,16 @@ export const SettingsProvider = (props) => {
       );
       let userArray = userList.data.listLocationUsers.items.map((use) => ({
         userName: use.user.name,
-        loc: use.location.locName,
-        locNick: use.location.locNick,
         sub: use.user.sub,
-        authType: 0,
+        subs: use.location.subs.items.map(loc => loc.userID),
+        locName: use.location.locName,
+        locNick: use.location.locNick,
       }));
       console.log("userArray", userArray);
+      userArray = userArray.filter(use => use.subs.includes(userDetails.sub))
+      console.log("userArray", userArray);
+
+      
 
       setUserList(userArray);
     } catch (error) {
@@ -80,6 +85,8 @@ export const SettingsProvider = (props) => {
         setFormData,
         formType,
         setFormType,
+        authType,
+        setAuthType
       }}
     >
       {props.children}

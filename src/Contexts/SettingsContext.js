@@ -17,6 +17,8 @@ export const SettingsProvider = (props) => {
   const [user, setUser] = useState();
 
   const [chosen, setChosen] = useState({
+    userName: "",
+    sub: "",
     locName: "",
     locNick: "",
   });

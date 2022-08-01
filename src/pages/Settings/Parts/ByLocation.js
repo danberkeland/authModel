@@ -15,7 +15,7 @@ const ListWrapper = styled.div`
 `;
 
 const ByLocation = () => {
-  const { userList, userDetails, setUserDetails } =
+  const { userList, userDetails, setUserDetails, chosen, setChosen } =
     useContext(SettingsContext);
 
   return (
@@ -25,8 +25,8 @@ const ByLocation = () => {
           value={userList.filter((use) => use.locNick === userDetails.locNick)}
           className="p-datatable-striped"
           selectionMode="single"
-          selection={userDetails.userName}
-          onSelectionChange={(e) => setUserDetails(...userDetails, e.value)}
+          selection={chosen.userName}
+          onSelectionChange={(e) => setChosen(...chosen, e.value)}
           dataKey="id"
         >
           <Column

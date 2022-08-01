@@ -15,18 +15,18 @@ const ListWrapper = styled.div`
 `;
 
 const ByUser = () => {
-  const { userList, user, setUser, userDetails, setUserDetails } =
+  const { userList, user, setUser, userDetails, setUserDetails, chosen, setChosen } =
     useContext(SettingsContext);
 
   return (
     <ListWrapper>
       <ScrollPanel>
         <DataTable
-          value={userList.filter((use) => use.userName === userDetails.userName)}
+          value={userList.filter((use) => use.userName === chosen.userName)}
           className="p-datatable-striped"
           selectionMode="single"
-          selection={userDetails.userName}
-          onSelectionChange={(e) => setUserDetails(...userDetails, e.value)}
+          selection={chosen.userName}
+          onSelectionChange={(e) => setChosen(...chosen, e.value)}
           dataKey="id"
         >
           <Column

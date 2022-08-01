@@ -69,6 +69,8 @@ const UsersList = () => {
             setChosen({
               locName: e.value.loc,
               locNick: e.value.locNick,
+              userName: e.value.userName,
+              sub: e.value.sub
             });
             setUserDetails({
               ...userDetails,

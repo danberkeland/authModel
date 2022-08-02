@@ -70,13 +70,14 @@ const UserPage = () => {
           <TabView
             activeIndex={activeIndex}
             onTabChange={(e) => setActiveIndex(e.index)}
-          >
+          >{/*}
             <TabPanel header="By User &nbsp;" rightIcon="pi pi-user">
               <ByUser setVisible={setVisible} dis={true} />
             </TabPanel>
+  */}
             <TabPanel header="By Location &nbsp;" rightIcon="pi pi-map">
               <ByLocation setVisible={setVisible} dis={true} />
-            </TabPanel>
+  </TabPanel>
             <TabPanel header="REQUESTED &nbsp;" rightIcon="pi pi-map">
               <Requested setVisible={setVisible} dis={true} />
             </TabPanel>

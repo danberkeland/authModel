@@ -36,20 +36,7 @@ const ByLocation = () => {
             filter
             filterPlaceholder="user"
           ></Column>
-          <Column
-            field="locName"
-            header="Location"
-            sortable
-            filter
-            filterPlaceholder="location"
-          ></Column>
-          <Column
-            field="locNick"
-            header="Nickname"
-            sortable
-            filter
-            filterPlaceholder="nickname"
-          ></Column>
+          
           <Column
             field="sub"
             header="UserID"

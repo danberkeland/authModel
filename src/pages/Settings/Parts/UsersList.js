@@ -60,7 +60,7 @@ const UsersList = () => {
     <ListWrapper>
       <ScrollPanel>
         <DataTable
-          value={userList}
+          value={userList.filter(use => use.sub === userDetails.sub)}
           className="p-datatable-striped"
           selectionMode="single"
           selection={user.userName}
@@ -81,7 +81,7 @@ const UsersList = () => {
           dataKey="id"
           filterDisplay="row"
           filters={filters}
-        >
+        >{/*
           <Column
             field="userName"
             header="User"
@@ -89,6 +89,7 @@ const UsersList = () => {
             filter
             filterPlaceholder="user"
           ></Column>
+        */}
           <Column
             field="locName"
             header="Location"
@@ -96,6 +97,7 @@ const UsersList = () => {
             filter
             filterPlaceholder="location"
           ></Column>
+        
         </DataTable>
       </ScrollPanel>
     </ListWrapper>

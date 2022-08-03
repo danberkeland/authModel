@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 import styled from "styled-components";
 
@@ -15,14 +15,15 @@ const ListWrapper = styled.div`
 `;
 
 const Requested = () => {
-  const { userList, setSelectedUserList, user, setUser } =
-    useContext(SettingsContext);
+  const { userList, user, setUser } = useContext(SettingsContext);
+
+  const requestedUserList = userList.filter((use) => use.sub === "REQUESTED");
 
   return (
     <ListWrapper>
       <ScrollPanel>
         <DataTable
-          value={userList.filter((use) => use.sub === "REQUESTED")}
+          value={requestedUserList}
           className="p-datatable-striped"
           selectionMode="single"
           selection={user.userName}

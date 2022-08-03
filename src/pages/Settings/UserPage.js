@@ -1,17 +1,14 @@
 import React, { useState, useContext } from "react";
 
-import ByLocation from "./Parts/ByLocation";
+import RegisteredUsers from "./Parts/RegisteredUsers";
 import Requested from "./Parts/Requested";
 
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 
-import { Sidebar } from "primereact/sidebar";
-
 import { Card } from "primereact/card";
 import { TabView, TabPanel } from "primereact/tabview";
-import { ScrollPanel } from "primereact/scrollpanel";
 import { Button } from "primereact/button";
 
 import UsersList from "./Parts/UsersList";
@@ -37,7 +34,6 @@ const InfoWrapper = styled.div`
 `;
 
 const UserPage = () => {
-  const [visible, setVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const { setFormType } = useContext(SettingsContext);
@@ -49,18 +45,6 @@ const UserPage = () => {
   return (
     <MainWrapper>
       <UsersList />
-      <Sidebar
-        visible={visible}
-        position="right"
-        className="p-sidebar-md"
-        blockScroll={false}
-        onHide={() => setVisible(false)}
-      >
-        <ScrollPanel style={{ width: "100%", height: "90vh" }}>
-          <ByLocation setVisible={setVisible} dis={false} />
-        </ScrollPanel>
-      </Sidebar>
-
       <InfoWrapper>
         <Button onClick={signOut}>Sign Out</Button>
         <Button className="p-button-outlined" label="Create New User"></Button>
@@ -70,10 +54,10 @@ const UserPage = () => {
             onTabChange={(e) => setActiveIndex(e.index)}
           >
             <TabPanel header="Registered &nbsp;" rightIcon="pi pi-map">
-              <ByLocation setVisible={setVisible} dis={true} />
+              <RegisteredUsers />
             </TabPanel>
             <TabPanel header="Unregistered &nbsp;" rightIcon="pi pi-map">
-              <Requested setVisible={setVisible} dis={true} />
+              <Requested />
             </TabPanel>
           </TabView>
         </Card>

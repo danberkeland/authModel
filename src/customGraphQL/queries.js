@@ -19,6 +19,7 @@ export const listLocationUsers = /* GraphQL */ `
           name
           sub
         }
+        authType
       }
     }
   }

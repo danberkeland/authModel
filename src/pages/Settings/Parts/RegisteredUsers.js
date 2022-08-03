@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 import styled from "styled-components";
 
@@ -14,15 +14,19 @@ const ListWrapper = styled.div`
   background: #ffffff;
 `;
 
-const ByUser = () => {
-  const { userList, user, setUser, userDetails, setUserDetails, chosen, setChosen } =
+const RegisteredUsers = () => {
+  const { userList, userDetails, chosen, setChosen } =
     useContext(SettingsContext);
+
+  const authorizedUserList = userList.filter(
+    (use) => use.locNick === userDetails.locNick
+  );
 
   return (
     <ListWrapper>
       <ScrollPanel>
         <DataTable
-          value={userList.filter((use) => use.userName === chosen.userName)}
+          value={authorizedUserList}
           className="p-datatable-striped"
           selectionMode="single"
           selection={chosen.userName}
@@ -36,13 +40,7 @@ const ByUser = () => {
             filter
             filterPlaceholder="user"
           ></Column>
-          <Column
-            field="locName"
-            header="Location"
-            sortable
-            filter
-            filterPlaceholder="location"
-          ></Column>
+
           <Column
             field="sub"
             header="UserID"
@@ -63,4 +61,4 @@ const ByUser = () => {
   );
 };
 
-export default ByUser;
+export default RegisteredUsers;

@@ -2,7 +2,7 @@ import { Amplify, Auth, Hub } from "aws-amplify";
 import { API, graphqlOperation } from "aws-amplify";
 import awsmobile from "../aws-exports";
 
-import { getUser, listAuth } from "../customGraphQL/queries";
+import { getUser, listAuth, listLocationUsers } from "../customGraphQL/queries";
 
 Amplify.configure(awsmobile);
 
@@ -33,15 +33,15 @@ export const setAuthListener = (setFormType, setUser, setUserDetails) => {
   Hub.listen("auth", (data) => {
     switch (data.payload.event) {
       case "signOut":
-        console.log("User Signed Out")
+        console.log("User Signed Out");
         setFormType("onNoUser");
         break;
       case "signIn":
-        console.log("New User Signed in")
+        console.log("New User Signed in");
         setFormType("signedIn");
-        checkUser().then(use => {
-            setUser(use)
-            })
+        checkUser().then((use) => {
+          setUser(use);
+        });
         break;
       default:
         break;
@@ -55,17 +55,27 @@ export const authSignOut = async (setFormType) => {
   setFormType("onNoUser");
 };
 
-
 // Grabs Authentication level for combo of location and user(sub)
 export const grabAuth = async (loc, sub) => {
-    console.log("grabAuth")
-    let info = await API.graphql(
-      graphqlOperation(listAuth, {
-        filter: {
-          locationID: { eq: loc },
-          userID: { eq: sub },
-        },
-      })
-    );
-    return info.data.listLocationUsers.items[0].authType
-  };
+  console.log("grabAuth");
+  let info = await API.graphql(
+    graphqlOperation(listAuth, {
+      filter: {
+        locationID: { eq: loc },
+        userID: { eq: sub },
+      },
+    })
+  );
+  return info.data.listLocationUsers.items[0].authType;
+};
+
+// Returns List of Locations/User combo details
+export const grabLocationUsers = async () => {
+  console.log("listLocationUsers");
+  const userList = await API.graphql(
+    graphqlOperation(listLocationUsers, {
+      limit: "1000",
+    })
+  );
+  return userList;
+};

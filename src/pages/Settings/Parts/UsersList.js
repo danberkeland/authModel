@@ -27,8 +27,7 @@ const UsersList = () => {
   } = useContext(SettingsContext);
 
   const [filters, setFilters] = useState({
-    userName: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    loc: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    locName: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
 
   const [selected, setSelected] = useState(userDetails);

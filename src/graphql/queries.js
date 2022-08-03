@@ -16,6 +16,13 @@ export const getLocation = /* GraphQL */ `
         }
         nextToken
       }
+      zoneName
+      addr1
+      addr2
+      city
+      zip
+      email
+      phone
       createdAt
       updatedAt
     }
@@ -42,6 +49,13 @@ export const listLocations = /* GraphQL */ `
         subs {
           nextToken
         }
+        zoneName
+        addr1
+        addr2
+        city
+        zip
+        email
+        phone
         createdAt
         updatedAt
       }
@@ -142,6 +156,13 @@ export const getLocationUser = /* GraphQL */ `
         subs {
           nextToken
         }
+        zoneName
+        addr1
+        addr2
+        city
+        zip
+        email
+        phone
         createdAt
         updatedAt
       }
@@ -161,8 +182,6 @@ export const getLocationUser = /* GraphQL */ `
     }
   }
 `;
-
-
 export const listLocationUsers = /* GraphQL */ `
   query ListLocationUsers(
     $filter: ModelLocationUserFilterInput
@@ -177,6 +196,13 @@ export const listLocationUsers = /* GraphQL */ `
         location {
           locNick
           locName
+          zoneName
+          addr1
+          addr2
+          city
+          zip
+          email
+          phone
           createdAt
           updatedAt
         }

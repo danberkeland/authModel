@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { SettingsContext } from "../../../Contexts/SettingsContext.js";
-import { grabAuth } from "../../../Auth/AuthHelpers.js";
+import { grabAuth, grabFullLocation } from "../../../Auth/AuthHelpers.js";
 
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -32,15 +32,16 @@ const UsersList = () => {
 
   const [selected, setSelected] = useState(userDetails);
 
-  const authorizedUserList = userList.filter((use) => use.sub === userDetails.sub)
+  const authorizedUserList = userList.filter(
+    (use) => use.sub === userDetails.sub
+  );
 
   useEffect(() => {
-    setChosen({
-      locName: selected.locName,
-      locNick: selected.locNick,
-      userName: selected.userName,
-      sub: selected.sub,
+    grabFullLocation(selected).then((fullLoc) => {
+      console.log("fullLoc",fullLoc)
+      setChosen(fullLoc);
     });
+
     setUserDetails({
       ...userDetails,
       locName: selected.locName,

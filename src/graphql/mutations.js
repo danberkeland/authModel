@@ -19,6 +19,13 @@ export const createLocation = /* GraphQL */ `
         }
         nextToken
       }
+      zoneName
+      addr1
+      addr2
+      city
+      zip
+      email
+      phone
       createdAt
       updatedAt
     }
@@ -42,6 +49,13 @@ export const updateLocation = /* GraphQL */ `
         }
         nextToken
       }
+      zoneName
+      addr1
+      addr2
+      city
+      zip
+      email
+      phone
       createdAt
       updatedAt
     }
@@ -65,6 +79,13 @@ export const deleteLocation = /* GraphQL */ `
         }
         nextToken
       }
+      zoneName
+      addr1
+      addr2
+      city
+      zip
+      email
+      phone
       createdAt
       updatedAt
     }
@@ -202,6 +223,13 @@ export const createLocationUser = /* GraphQL */ `
         subs {
           nextToken
         }
+        zoneName
+        addr1
+        addr2
+        city
+        zip
+        email
+        phone
         createdAt
         updatedAt
       }
@@ -236,6 +264,13 @@ export const updateLocationUser = /* GraphQL */ `
         subs {
           nextToken
         }
+        zoneName
+        addr1
+        addr2
+        city
+        zip
+        email
+        phone
         createdAt
         updatedAt
       }
@@ -270,6 +305,13 @@ export const deleteLocationUser = /* GraphQL */ `
         subs {
           nextToken
         }
+        zoneName
+        addr1
+        addr2
+        city
+        zip
+        email
+        phone
         createdAt
         updatedAt
       }

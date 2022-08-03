@@ -17,6 +17,7 @@ import styled from "styled-components";
 import { SettingsContext } from "../../Contexts/SettingsContext";
 
 import { authSignOut } from "../../Auth/AuthHelpers";
+import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth";
 
 const MainWrapper = styled.div`
   float: left;
@@ -36,7 +37,7 @@ const InfoWrapper = styled.div`
 const UserPage = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const { setFormType } = useContext(SettingsContext);
+  const { setFormType, chosen } = useContext(SettingsContext);
 
   const signOut = () => {
     authSignOut(setFormType);
@@ -48,6 +49,16 @@ const UserPage = () => {
       <InfoWrapper>
         <Button onClick={signOut}>Sign Out</Button>
         <Button className="p-button-outlined" label="Create New User"></Button>
+        <Card>
+          {chosen.locName} 
+          {chosen.addr1}
+          {chosen.addr2}
+          {chosen.city}
+          {chosen.zip}
+          {chosen.phone}
+          {chosen.email}
+          {chosen.zone}
+        </Card>
         <Card>
           <TabView
             activeIndex={activeIndex}

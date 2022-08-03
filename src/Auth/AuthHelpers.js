@@ -79,3 +79,15 @@ export const grabLocationUsers = async () => {
   );
   return userList;
 };
+
+
+export const grabFullLocation = async (selected) => {
+  return ({...selected, locName: "High",
+    locNick: "A",
+    addr1: "D",
+    addr2: "E",
+    city: "F",
+    zip: "G",
+    email: "H",
+    zoneName: "I"})
+}

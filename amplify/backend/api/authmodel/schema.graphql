@@ -9,6 +9,14 @@ type Location @model {
   locNick: String! @primaryKey
   locName: String!
   subs: [User] @manyToMany(relationName: "LocationUser")
+  zoneName: String
+  addr1: String
+  addr2: String
+  city: String
+  zip: String
+  email: String
+  phone: String
+  
 }
 
 type User @model {

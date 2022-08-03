@@ -4,7 +4,6 @@ import ByLocation from "./Parts/ByLocation";
 import ByUser from "./Parts/ByUser";
 import Requested from "./Parts/Requested";
 
-
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
@@ -43,13 +42,11 @@ const UserPage = () => {
 
   const { setFormType } = useContext(SettingsContext);
 
-  
   const signOut = async () => {
     await Auth.signOut().then((e) => setFormType("onNoUser"));
-  }
+  };
   return (
     <MainWrapper>
-     
       <UsersList />
       <Sidebar
         visible={visible}
@@ -59,29 +56,24 @@ const UserPage = () => {
         onHide={() => setVisible(false)}
       >
         <ScrollPanel style={{ width: "100%", height: "90vh" }}>
-          <ByUser setVisible={setVisible} dis={false} />
+          <ByLocation setVisible={setVisible} dis={false} />
         </ScrollPanel>
       </Sidebar>
 
       <InfoWrapper>
-      <Button onClick={signOut}>Sign Out</Button>
+        <Button onClick={signOut}>Sign Out</Button>
         <Button className="p-button-outlined" label="Create New User"></Button>
         <Card>
           <TabView
             activeIndex={activeIndex}
             onTabChange={(e) => setActiveIndex(e.index)}
-          >{/*}
-            <TabPanel header="By User &nbsp;" rightIcon="pi pi-user">
-              <ByUser setVisible={setVisible} dis={true} />
-            </TabPanel>
-  */}
+          >
             <TabPanel header="By Location &nbsp;" rightIcon="pi pi-map">
               <ByLocation setVisible={setVisible} dis={true} />
-  </TabPanel>
+            </TabPanel>
             <TabPanel header="REQUESTED &nbsp;" rightIcon="pi pi-map">
               <Requested setVisible={setVisible} dis={true} />
             </TabPanel>
-            
           </TabView>
         </Card>
       </InfoWrapper>

@@ -1,7 +1,6 @@
 import React, { useState, createContext, useEffect } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { listLocationUsers } from "../customGraphQL/queries";
-import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
 export const SettingsContext = createContext();
 
@@ -44,10 +43,11 @@ export const SettingsProvider = (props) => {
 
   useEffect(() => {
     fetchCustomers();
-  }, [userDetails]);
+  }, [userDetails.sub]);
 
   const fetchCustomers = async () => {
     try {
+      console.log("listLocationUsers")
       const userList = await API.graphql(
         graphqlOperation(listLocationUsers, {
           limit: "1000",
@@ -60,9 +60,8 @@ export const SettingsProvider = (props) => {
         locName: use.location.locName,
         locNick: use.location.locNick,
       }));
-      console.log("userArray", userArray);
       userArray = userArray.filter(use => use.subs.includes(userDetails.sub))
-      console.log("userArray", userArray);
+
 
       
 

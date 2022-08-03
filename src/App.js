@@ -1,7 +1,6 @@
 import React, { useEffect, useContext } from "react";
 
-import { Amplify, Auth, Hub } from "aws-amplify";
-import { API, graphqlOperation } from "aws-amplify";
+import { Amplify } from "aws-amplify";
 import awsmobile from "./aws-exports";
 
 import { SettingsContext } from "./Contexts/SettingsContext";
@@ -17,10 +16,10 @@ import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 
-
-import { getUser } from "./customGraphQL/queries";
+import { checkUser, fetchUserDetails, setAuthListener} from "./Auth/AuthHelpers"
 
 Amplify.configure(awsmobile);
+
 
 export function App() {
   const {
@@ -30,61 +29,30 @@ export function App() {
     formType,
     authType,
     setUser,
-    chosen
+    user,
   } = useContext(SettingsContext);
 
   useEffect(() => {
-    checkUser();
-    setAuthListener();
+    checkUser().then((use) => {
+      setUser(use);
+      setFormType(use ? "signedIn" : "onNoUser");
+    });
   }, []);
 
-  const checkUser = async () => {
-    try {
-      await Auth.currentAuthenticatedUser().then((use) => {
-        setUser(use);
-        console.log("User", use);
-        if (use) {
-          fetchUserDetails(use.username);
-          setFormType("signedIn");
-        } else {
-          setFormType("onNoUser");
-        }
+  useEffect(() => {
+    setAuthListener(setFormType());
+  }, []);
+
+  useEffect(() => {
+    user &&
+      fetchUserDetails(user.username).then((info) => {
+        setUserDetails({
+          ...userDetails,
+          userName: info.name,
+          sub: info.sub,
+        });
       });
-    } catch (err) {
-      // console.log(err)
-    }
-  };
-
-  const fetchUserDetails = async (sub) => {
-    console.log("sub", sub);
-    try {
-      const user = await API.graphql(graphqlOperation(getUser, { sub: sub }));
-      let info = user.data.getUser;
-      console.log("info", info);
-
-      setUserDetails({ ...userDetails, userName: info.name, sub: info.sub });
-    } catch (error) {
-      console.log("error on fetching Cust List", error);
-    }
-  };
-
-  const setAuthListener = () => {
-    Hub.listen("auth", (data) => {
-      switch (data.payload.event) {
-        case "signOut":
-          setFormType("onNoUser");
-          break;
-        case "signIn":
-          console.log("payload", data.payload.data);
-          setUser(data.payload.data);
-          fetchUserDetails(data.payload.data.username);
-          setFormType("signedIn");
-          break;
-        default:
-          break;
-      }
-    });
-  };
+  }, [user]);
 
   return (
     <div className="card">
@@ -98,12 +66,10 @@ export function App() {
               <UserPage />
             </React.Fragment>
           )}
-          
           {formType === "onNoUser" && <Splash />}
           {formType === "Apply" && <UserApplyForm />}
           {formType === "resetPassword" && <UserResetPassword />}
           {formType === "Thankyou" && <UserApplyThanks />}
-         
         </div>
       </div>
     </div>

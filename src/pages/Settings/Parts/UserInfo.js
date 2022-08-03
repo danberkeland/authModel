@@ -100,7 +100,7 @@ const UserInfo = ({ setVisible, dis }) => {
         <InputMask mask="999-999-9999" id="phone" disabled={dis} />
       </div>
       <br />
-      
+
       <br />
     </React.Fragment>
   );

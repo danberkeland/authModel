@@ -17,6 +17,17 @@ const ListWrapper = styled.div`
   background: #ffffff;
 `;
 
+const grabAuth = (loc, sub) => {
+  return API.graphql(
+    graphqlOperation(listAuth, {
+      filter: {
+        locationID: { eq: loc },
+        userID: { eq: sub },
+      },
+    })
+  );
+};
+
 const UsersList = () => {
   const {
     userList,
@@ -35,19 +46,9 @@ const UsersList = () => {
   });
 
   useEffect(() => {
-    console.log("chosen", chosen.locNick);
-    console.log("sub", userDetails);
     try {
-      API.graphql(
-        graphqlOperation(listAuth, {
-          filter: {
-            locationID: { eq: chosen.locNick },
-            userID: { eq: userDetails.sub },
-          },
-        })
-      )
+      grabAuth(chosen.locNick, userDetails.sub)
         .then((sub) => {
-          console.log("authTypeSub", sub);
           setAuthType(sub.data.listLocationUsers.items[0].authType);
         })
         .catch((err) => setAuthType(0));
@@ -60,36 +61,27 @@ const UsersList = () => {
     <ListWrapper>
       <ScrollPanel>
         <DataTable
-          value={userList.filter(use => use.sub === userDetails.sub)}
+          value={userList.filter((use) => use.sub === userDetails.sub)}
           className="p-datatable-striped"
           selectionMode="single"
           selection={user.userName}
           onSelectionChange={(e) => {
-            console.log("setUser", e);
             setChosen({
-              locName: e.value.loc,
+              locName: e.value.locName,
               locNick: e.value.locNick,
               userName: e.value.userName,
-              sub: e.value.sub
+              sub: e.value.sub,
             });
             setUserDetails({
               ...userDetails,
-              locName: e.value.loc,
+              locName: e.value.locName,
               locNick: e.value.locNick,
             });
           }}
           dataKey="id"
           filterDisplay="row"
           filters={filters}
-        >{/*
-          <Column
-            field="userName"
-            header="User"
-            sortable
-            filter
-            filterPlaceholder="user"
-          ></Column>
-        */}
+        >
           <Column
             field="locName"
             header="Location"
@@ -97,7 +89,6 @@ const UsersList = () => {
             filter
             filterPlaceholder="location"
           ></Column>
-        
         </DataTable>
       </ScrollPanel>
     </ListWrapper>

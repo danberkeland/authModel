@@ -16,10 +16,33 @@ export const CenteredContainer = styled.div`
   transform: translateX(-50%) translateY(-50%);
 `;
 
+
+export const MainWrapper = styled.div`
+  float: left;
+  width: 100%;
+
+  @media only screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+  }
+`;
+
+
+export const InfoWrapper = styled.div`
+  float: left;
+  width: 100%;
+`;
+
 export const Title = styled.h2`
   padding: 0;
-  margin: 5px 10px;
+  margin: 10px 10px;
   color: rgb(66, 97, 201);
+`;
+
+export const SubInfo = styled.div`
+  padding: 0;
+  margin: 8px 10px;
+  color: darkgray;
 `;
 
 

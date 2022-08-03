@@ -3,6 +3,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import awsmobile from "../aws-exports";
 
 import { getUser, listAuth, listLocationUsers } from "../customGraphQL/queries";
+import { getLocation } from "../graphql/queries";
 
 Amplify.configure(awsmobile);
 
@@ -82,12 +83,12 @@ export const grabLocationUsers = async () => {
 
 
 export const grabFullLocation = async (selected) => {
-  return ({...selected, locName: "High",
-    locNick: "A",
-    addr1: "D",
-    addr2: "E",
-    city: "F",
-    zip: "G",
-    email: "H",
-    zoneName: "I"})
+  console.log("getLocation");
+
+  console.log("selected",selected)
+  const locInfo = await API.graphql(
+    graphqlOperation(getLocation , { locNick: selected.locNick })
+  );
+  let fullInfo = locInfo.data.getLocation
+  return fullInfo
 }

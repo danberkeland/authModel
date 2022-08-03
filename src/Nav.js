@@ -1,4 +1,18 @@
+import { Button } from "primereact/button";
 import { Menubar } from "primereact/menubar";
+import React, { useContext } from "react";
+
+import { SettingsContext } from "./Contexts/SettingsContext";
+
+import { authSignOut } from "./Auth/AuthHelpers";
+
+import styled from "styled-components";
+
+const TopBar = styled.div`
+  display: grid;
+  grid-template-columns: 10fr 1fr;
+  background-color: white;
+`;
 
 const items = [
   {
@@ -32,7 +46,17 @@ const items = [
 ];
 
 function Nav() {
-  return <Menubar model={items} />;
+  const { setFormType, chosen } = useContext(SettingsContext);
+
+  const signOut = () => {
+    authSignOut(setFormType);
+  };
+  return (
+    <TopBar>
+      <Menubar model={items} />
+      <Button onClick={signOut} label={"Sign Out"}></Button>
+    </TopBar>
+  );
 }
 
 export default Nav;

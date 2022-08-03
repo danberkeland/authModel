@@ -7,59 +7,34 @@ import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 
-import { Card } from "primereact/card";
 import { TabView, TabPanel } from "primereact/tabview";
 import { Button } from "primereact/button";
 
 import UsersList from "./Parts/UsersList";
 
-import styled from "styled-components";
+import { MainWrapper, InfoWrapper } from "../../CommonStyles";
+
 import { SettingsContext } from "../../Contexts/SettingsContext";
 
-import { authSignOut } from "../../Auth/AuthHelpers";
-import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth";
+import { UserInfo } from "./Parts/UserInfo";
 
-const MainWrapper = styled.div`
-  float: left;
-  width: 100%;
 
-  @media only screen and (min-width: 768px) {
-    display: grid;
-    grid-template-columns: 1fr 2.5fr;
-  }
-`;
-
-const InfoWrapper = styled.div`
-  float: left;
-  width: 100%;
-`;
 
 const UserPage = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const { setFormType, chosen } = useContext(SettingsContext);
+  const { chosen } = useContext(SettingsContext);
 
-  const signOut = () => {
-    authSignOut(setFormType);
-  };
 
   return (
     <MainWrapper>
       <UsersList />
       <InfoWrapper>
-        <Button onClick={signOut}>Sign Out</Button>
-        <Button className="p-button-outlined" label="Create New User"></Button>
-        <Card>
-          {chosen.locName} 
-          {chosen.addr1}
-          {chosen.addr2}
-          {chosen.city}
-          {chosen.zip}
-          {chosen.phone}
-          {chosen.email}
-          {chosen.zone}
-        </Card>
-        <Card>
+       
+        <Button className="p-button-outlined" label="Create New Location"></Button>
+        <UserInfo chosen={chosen} />
+
+     
           <TabView
             activeIndex={activeIndex}
             onTabChange={(e) => setActiveIndex(e.index)}
@@ -71,7 +46,7 @@ const UserPage = () => {
               <Requested />
             </TabPanel>
           </TabView>
-        </Card>
+       
       </InfoWrapper>
     </MainWrapper>
   );

@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 
 import ByLocation from "./Parts/ByLocation";
-import ByUser from "./Parts/ByUser";
 import Requested from "./Parts/Requested";
 
 import "primereact/resources/themes/saga-blue/theme.css";
@@ -14,12 +13,13 @@ import { Card } from "primereact/card";
 import { TabView, TabPanel } from "primereact/tabview";
 import { ScrollPanel } from "primereact/scrollpanel";
 import { Button } from "primereact/button";
-import { Auth } from "aws-amplify";
 
 import UsersList from "./Parts/UsersList";
 
 import styled from "styled-components";
 import { SettingsContext } from "../../Contexts/SettingsContext";
+
+import { authSignOut } from "../../Auth/AuthHelpers";
 
 const MainWrapper = styled.div`
   float: left;
@@ -42,9 +42,10 @@ const UserPage = () => {
 
   const { setFormType } = useContext(SettingsContext);
 
-  const signOut = async () => {
-    await Auth.signOut().then((e) => setFormType("onNoUser"));
+  const signOut = () => {
+    authSignOut(setFormType);
   };
+
   return (
     <MainWrapper>
       <UsersList />
@@ -68,10 +69,10 @@ const UserPage = () => {
             activeIndex={activeIndex}
             onTabChange={(e) => setActiveIndex(e.index)}
           >
-            <TabPanel header="By Location &nbsp;" rightIcon="pi pi-map">
+            <TabPanel header="Registered &nbsp;" rightIcon="pi pi-map">
               <ByLocation setVisible={setVisible} dis={true} />
             </TabPanel>
-            <TabPanel header="REQUESTED &nbsp;" rightIcon="pi pi-map">
+            <TabPanel header="Unregistered &nbsp;" rightIcon="pi pi-map">
               <Requested setVisible={setVisible} dis={true} />
             </TabPanel>
           </TabView>

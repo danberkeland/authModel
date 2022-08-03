@@ -1,6 +1,5 @@
 import { Menubar } from "primereact/menubar";
 
-
 const items = [
   {
     label: "Customer News",

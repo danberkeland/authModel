@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { API, graphqlOperation } from "aws-amplify";
 
 import styled from "styled-components";
 
 import { SettingsContext } from "../../../Contexts/SettingsContext.js";
-import { listAuth } from "../../../customGraphQL/queries.js";
+import { grabAuth } from "../../../Auth/AuthHelpers.js";
 
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -17,22 +16,9 @@ const ListWrapper = styled.div`
   background: #ffffff;
 `;
 
-const grabAuth = (loc, sub) => {
-  return API.graphql(
-    graphqlOperation(listAuth, {
-      filter: {
-        locationID: { eq: loc },
-        userID: { eq: sub },
-      },
-    })
-  );
-};
-
 const UsersList = () => {
   const {
     userList,
-    user,
-    setUser,
     setAuthType,
     userDetails,
     setUserDetails,
@@ -45,11 +31,29 @@ const UsersList = () => {
     loc: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
 
+  const [selected, setSelected] = useState(userDetails);
+
+  const authorizedUserList = userList.filter((use) => use.sub === userDetails.sub)
+
+  useEffect(() => {
+    setChosen({
+      locName: selected.locName,
+      locNick: selected.locNick,
+      userName: selected.userName,
+      sub: selected.sub,
+    });
+    setUserDetails({
+      ...userDetails,
+      locName: selected.locName,
+      locNick: selected.locNick,
+    });
+  }, [selected]);
+
   useEffect(() => {
     try {
       grabAuth(chosen.locNick, userDetails.sub)
         .then((sub) => {
-          setAuthType(sub.data.listLocationUsers.items[0].authType);
+          setAuthType(sub);
         })
         .catch((err) => setAuthType(0));
     } catch (err) {
@@ -61,22 +65,11 @@ const UsersList = () => {
     <ListWrapper>
       <ScrollPanel>
         <DataTable
-          value={userList.filter((use) => use.sub === userDetails.sub)}
+          value={authorizedUserList}
           className="p-datatable-striped"
           selectionMode="single"
-          selection={user.userName}
           onSelectionChange={(e) => {
-            setChosen({
-              locName: e.value.locName,
-              locNick: e.value.locNick,
-              userName: e.value.userName,
-              sub: e.value.sub,
-            });
-            setUserDetails({
-              ...userDetails,
-              locName: e.value.locName,
-              locNick: e.value.locNick,
-            });
+            setSelected(e.value);
           }}
           dataKey="id"
           filterDisplay="row"

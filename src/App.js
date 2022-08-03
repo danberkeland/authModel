@@ -16,10 +16,13 @@ import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 
-import { checkUser, fetchUserDetails, setAuthListener} from "./Auth/AuthHelpers"
+import {
+  checkUser,
+  fetchUserDetails,
+  setAuthListener,
+} from "./Auth/AuthHelpers";
 
 Amplify.configure(awsmobile);
-
 
 export function App() {
   const {
@@ -33,14 +36,14 @@ export function App() {
   } = useContext(SettingsContext);
 
   useEffect(() => {
+    setAuthListener(setFormType, setUser, setUserDetails);
+  }, []);
+
+  useEffect(() => {
     checkUser().then((use) => {
       setUser(use);
       setFormType(use ? "signedIn" : "onNoUser");
     });
-  }, []);
-
-  useEffect(() => {
-    setAuthListener(setFormType());
   }, []);
 
   useEffect(() => {
@@ -55,24 +58,20 @@ export function App() {
   }, [user]);
 
   return (
-    <div className="card">
-      <div className="card-container yellow-container">
-        <div className="flex flex-column">
-          Welcome {userDetails.userName}. Location: {userDetails.locName}.
-          Authtype: {authType}.
-          {formType === "signedIn" && (
-            <React.Fragment>
-              <Nav />
-              <UserPage />
-            </React.Fragment>
-          )}
-          {formType === "onNoUser" && <Splash />}
-          {formType === "Apply" && <UserApplyForm />}
-          {formType === "resetPassword" && <UserResetPassword />}
-          {formType === "Thankyou" && <UserApplyThanks />}
-        </div>
-      </div>
-    </div>
+    <React.Fragment>
+      Welcome {userDetails.userName}. Location: {userDetails.locName}. Authtype:{" "}
+      {authType}.
+      {formType === "signedIn" && (
+        <React.Fragment>
+          <Nav />
+          <UserPage />
+        </React.Fragment>
+      )}
+      {formType === "onNoUser" && <Splash />}
+      {formType === "Apply" && <UserApplyForm />}
+      {formType === "resetPassword" && <UserResetPassword />}
+      {formType === "Thankyou" && <UserApplyThanks />}
+    </React.Fragment>
   );
 }
 

@@ -1,11 +1,9 @@
-import { Amplify, Auth, Hub } from "aws-amplify";
+import { Auth, Hub } from "aws-amplify";
 import { API, graphqlOperation } from "aws-amplify";
-import awsmobile from "../aws-exports";
 
 import { getUser, listAuth, listLocationUsers } from "../customGraphQL/queries";
 import { getLocation } from "../graphql/queries";
 
-Amplify.configure(awsmobile);
 
 //  Checks for and, if exists, returns full Cognito object for user
 export const checkUser = async () => {

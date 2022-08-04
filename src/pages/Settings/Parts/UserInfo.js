@@ -38,7 +38,7 @@ export const UserInfo = () => {
       <MainWrapper>
         <Title>{locName}</Title>
 
-        <div></div>
+        <div>  </div>
         <div>
           <SubInfo>{addr1}</SubInfo>
           <SubInfo>{addr2}</SubInfo>

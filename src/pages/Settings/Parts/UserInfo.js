@@ -31,7 +31,7 @@ export const UserInfo = () => {
       </Sidebar>
       <Button
         icon="pi pi-arrow-left"
-        label="Edit"
+        label="Edit Location"
         onClick={() => setVisibleRight(true)}
         className="mr-2"
       />

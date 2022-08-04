@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 
 import RegisteredUsers from "./Parts/RegisteredUsers";
 import Requested from "./Parts/Requested";
@@ -14,8 +14,6 @@ import UsersList from "./Parts/UsersList";
 
 import { MainWrapper, InfoWrapper } from "../../CommonStyles";
 
-import { SettingsContext } from "../../Contexts/SettingsContext";
-
 import { UserInfo } from "./Parts/UserInfo";
 
 
@@ -23,15 +21,13 @@ import { UserInfo } from "./Parts/UserInfo";
 const UserPage = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const { chosen } = useContext(SettingsContext);
-
-
   return (
     <MainWrapper>
       <UsersList />
       <InfoWrapper>
        
-        <Button className="p-button-outlined" label="Create New Location"></Button>
+        <Button className="p-button-success" label="Create New Location"></Button>
+        <Button className="p-button-warning" label="Create New User"></Button>
         <UserInfo />
 
      

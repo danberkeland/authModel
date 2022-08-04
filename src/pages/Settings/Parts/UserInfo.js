@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -8,11 +8,13 @@ import { Button } from "primereact/button";
 import { Sidebar } from "primereact/sidebar";
 
 import { LocationForm } from "./LocationForm";
+import { SettingsContext } from "../../../Contexts/SettingsContext";
 
 import { Title, SubInfo, MainWrapper } from "../../../CommonStyles";
 
-export const UserInfo = ({ chosen }) => {
+export const UserInfo = () => {
   const [visibleRight, setVisibleRight] = useState(false);
+  const { chosen } = useContext(SettingsContext);
 
   const { locName, addr1, addr2, city, zip, phone, email, zoneName } = chosen;
 
@@ -25,7 +27,7 @@ export const UserInfo = ({ chosen }) => {
         position="right"
         onHide={() => setVisibleRight(false)}
       >
-        <LocationForm  chosen={chosen} />
+        <LocationForm  setVisible={setVisibleRight} />
       </Sidebar>
       <Button
         icon="pi pi-arrow-left"

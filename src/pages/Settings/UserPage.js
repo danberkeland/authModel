@@ -32,7 +32,7 @@ const UserPage = () => {
       <InfoWrapper>
        
         <Button className="p-button-outlined" label="Create New Location"></Button>
-        <UserInfo chosen={chosen} />
+        <UserInfo />
 
      
           <TabView

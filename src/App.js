@@ -59,6 +59,7 @@ export function App() {
 
   return (
     <React.Fragment>
+      <h1>Kato was Here</h1>
       Welcome {userDetails.userName}. Location: {userDetails.locName}. Authtype:{" "}
       {authType}.
       {formType === "signedIn" && (

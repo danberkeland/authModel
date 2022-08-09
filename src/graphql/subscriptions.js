@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateLocation = /* GraphQL */ `
-  subscription OnCreateLocation {
-    onCreateLocation {
+  subscription OnCreateLocation($filter: ModelSubscriptionLocationFilterInput) {
+    onCreateLocation(filter: $filter) {
       locNick
       locName
       subs {
@@ -29,8 +29,8 @@ export const onCreateLocation = /* GraphQL */ `
   }
 `;
 export const onUpdateLocation = /* GraphQL */ `
-  subscription OnUpdateLocation {
-    onUpdateLocation {
+  subscription OnUpdateLocation($filter: ModelSubscriptionLocationFilterInput) {
+    onUpdateLocation(filter: $filter) {
       locNick
       locName
       subs {
@@ -56,8 +56,8 @@ export const onUpdateLocation = /* GraphQL */ `
   }
 `;
 export const onDeleteLocation = /* GraphQL */ `
-  subscription OnDeleteLocation {
-    onDeleteLocation {
+  subscription OnDeleteLocation($filter: ModelSubscriptionLocationFilterInput) {
+    onDeleteLocation(filter: $filter) {
       locNick
       locName
       subs {
@@ -83,8 +83,8 @@ export const onDeleteLocation = /* GraphQL */ `
   }
 `;
 export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser {
-    onCreateUser {
+  subscription OnCreateUser($filter: ModelSubscriptionUserFilterInput) {
+    onCreateUser(filter: $filter) {
       name
       email
       phone
@@ -105,8 +105,8 @@ export const onCreateUser = /* GraphQL */ `
   }
 `;
 export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser {
-    onUpdateUser {
+  subscription OnUpdateUser($filter: ModelSubscriptionUserFilterInput) {
+    onUpdateUser(filter: $filter) {
       name
       email
       phone
@@ -127,8 +127,8 @@ export const onUpdateUser = /* GraphQL */ `
   }
 `;
 export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser {
-    onDeleteUser {
+  subscription OnDeleteUser($filter: ModelSubscriptionUserFilterInput) {
+    onDeleteUser(filter: $filter) {
       name
       email
       phone
@@ -149,8 +149,8 @@ export const onDeleteUser = /* GraphQL */ `
   }
 `;
 export const onCreateRequest = /* GraphQL */ `
-  subscription OnCreateRequest {
-    onCreateRequest {
+  subscription OnCreateRequest($filter: ModelSubscriptionRequestFilterInput) {
+    onCreateRequest(filter: $filter) {
       id
       name
       loc
@@ -160,8 +160,8 @@ export const onCreateRequest = /* GraphQL */ `
   }
 `;
 export const onUpdateRequest = /* GraphQL */ `
-  subscription OnUpdateRequest {
-    onUpdateRequest {
+  subscription OnUpdateRequest($filter: ModelSubscriptionRequestFilterInput) {
+    onUpdateRequest(filter: $filter) {
       id
       name
       loc
@@ -171,8 +171,8 @@ export const onUpdateRequest = /* GraphQL */ `
   }
 `;
 export const onDeleteRequest = /* GraphQL */ `
-  subscription OnDeleteRequest {
-    onDeleteRequest {
+  subscription OnDeleteRequest($filter: ModelSubscriptionRequestFilterInput) {
+    onDeleteRequest(filter: $filter) {
       id
       name
       loc
@@ -182,8 +182,10 @@ export const onDeleteRequest = /* GraphQL */ `
   }
 `;
 export const onCreateLocationUser = /* GraphQL */ `
-  subscription OnCreateLocationUser {
-    onCreateLocationUser {
+  subscription OnCreateLocationUser(
+    $filter: ModelSubscriptionLocationUserFilterInput
+  ) {
+    onCreateLocationUser(filter: $filter) {
       id
       locationID
       userID
@@ -220,8 +222,10 @@ export const onCreateLocationUser = /* GraphQL */ `
   }
 `;
 export const onUpdateLocationUser = /* GraphQL */ `
-  subscription OnUpdateLocationUser {
-    onUpdateLocationUser {
+  subscription OnUpdateLocationUser(
+    $filter: ModelSubscriptionLocationUserFilterInput
+  ) {
+    onUpdateLocationUser(filter: $filter) {
       id
       locationID
       userID
@@ -258,8 +262,10 @@ export const onUpdateLocationUser = /* GraphQL */ `
   }
 `;
 export const onDeleteLocationUser = /* GraphQL */ `
-  subscription OnDeleteLocationUser {
-    onDeleteLocationUser {
+  subscription OnDeleteLocationUser(
+    $filter: ModelSubscriptionLocationUserFilterInput
+  ) {
+    onDeleteLocationUser(filter: $filter) {
       id
       locationID
       userID

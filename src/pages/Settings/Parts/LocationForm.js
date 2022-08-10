@@ -65,9 +65,9 @@ export const LocationForm = ({ setVisible }) => {
     );
   };
 
-  const onSubmit = (data, form) => {
+  const onSubmit = (data) => {
     setChosen({...data})
-    saveLocInfo(data, form);
+    saveLocInfo(data);
     setChange(false)
     setVisible(false)
   };

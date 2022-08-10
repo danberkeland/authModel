@@ -16,8 +16,6 @@ import { MainWrapper, InfoWrapper } from "../../CommonStyles";
 
 import { UserInfo } from "./Parts/UserInfo";
 
-
-
 const UserPage = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -25,12 +23,14 @@ const UserPage = () => {
     <MainWrapper>
       <UsersList />
       <InfoWrapper>
-       
-        <Button className="p-button-success" label="Create New Location"></Button>
+        <Button
+          className="p-button-success"
+          label="Create New Location"
+        ></Button>
         <Button className="p-button-warning" label="Create New User"></Button>
         <UserInfo />
 
-     
+        
           <TabView
             activeIndex={activeIndex}
             onTabChange={(e) => setActiveIndex(e.index)}
@@ -42,7 +42,7 @@ const UserPage = () => {
               <Requested />
             </TabPanel>
           </TabView>
-       
+
       </InfoWrapper>
     </MainWrapper>
   );

@@ -16,23 +16,5 @@
         "authmodel66592de2": {}
       }
     }
-  },
-  "test": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-authmodel-test-91804-authRole",
-      "UnauthRoleArn": "arn:aws:iam::191477602114:role/amplify-authmodel-test-91804-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::191477602114:role/amplify-authmodel-test-91804-authRole",
-      "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-authmodel-test-91804-deployment",
-      "UnauthRoleName": "amplify-authmodel-test-91804-unauthRole",
-      "StackName": "amplify-authmodel-test-91804",
-      "StackId": "arn:aws:cloudformation:us-east-2:191477602114:stack/amplify-authmodel-test-91804/d959b3a0-17fe-11ed-80f9-06fdedf09b2c",
-      "AmplifyAppId": "d2dgw8wu9vusbn"
-    },
-    "categories": {
-      "auth": {
-        "authmodel66592de2": {}
-      }
-    }
   }
 }

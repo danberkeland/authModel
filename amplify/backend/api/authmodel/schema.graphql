@@ -8,7 +8,7 @@ input AMPLIFY {
 type Location @model {
   locNick: String! @primaryKey
   locName: String!
-  subs: [User] @manyToMany(relationName: "LocationUser")
+  subs: [LocationUser] @hasMany
   zoneName: String
   addr1: String
   addr2: String
@@ -24,8 +24,18 @@ type User @model {
   email: String!
   phone: String
   sub: String! @primaryKey
-  locs: [Location] @manyToMany(relationName: "LocationUser")
+  locs: [LocationUser] @hasMany
 }
+
+type LocationUser @model {
+  id: ID!
+  authType: Int 
+  location_id: String!
+  user_id: String!
+  location: Location! @belongsTo(fields: ["location_id"])
+  user: User! @belongsTo( fields: ["user_id"])
+}
+
 
 type Request @model {
   id: ID!

@@ -9,10 +9,13 @@ export const onCreateLocation = /* GraphQL */ `
       subs {
         items {
           id
-          locationID
-          userID
+          authType
+          location_id
+          user_id
           createdAt
           updatedAt
+          locationSubsId
+          userLocsId
         }
         nextToken
       }
@@ -36,10 +39,13 @@ export const onUpdateLocation = /* GraphQL */ `
       subs {
         items {
           id
-          locationID
-          userID
+          authType
+          location_id
+          user_id
           createdAt
           updatedAt
+          locationSubsId
+          userLocsId
         }
         nextToken
       }
@@ -63,10 +69,13 @@ export const onDeleteLocation = /* GraphQL */ `
       subs {
         items {
           id
-          locationID
-          userID
+          authType
+          location_id
+          user_id
           createdAt
           updatedAt
+          locationSubsId
+          userLocsId
         }
         nextToken
       }
@@ -92,10 +101,13 @@ export const onCreateUser = /* GraphQL */ `
       locs {
         items {
           id
-          locationID
-          userID
+          authType
+          location_id
+          user_id
           createdAt
           updatedAt
+          locationSubsId
+          userLocsId
         }
         nextToken
       }
@@ -114,10 +126,13 @@ export const onUpdateUser = /* GraphQL */ `
       locs {
         items {
           id
-          locationID
-          userID
+          authType
+          location_id
+          user_id
           createdAt
           updatedAt
+          locationSubsId
+          userLocsId
         }
         nextToken
       }
@@ -136,15 +151,147 @@ export const onDeleteUser = /* GraphQL */ `
       locs {
         items {
           id
-          locationID
-          userID
+          authType
+          location_id
+          user_id
           createdAt
           updatedAt
+          locationSubsId
+          userLocsId
         }
         nextToken
       }
       createdAt
       updatedAt
+    }
+  }
+`;
+export const onCreateLocationUser = /* GraphQL */ `
+  subscription OnCreateLocationUser(
+    $filter: ModelSubscriptionLocationUserFilterInput
+  ) {
+    onCreateLocationUser(filter: $filter) {
+      id
+      authType
+      location_id
+      user_id
+      location {
+        locNick
+        locName
+        subs {
+          nextToken
+        }
+        zoneName
+        addr1
+        addr2
+        city
+        zip
+        email
+        phone
+        createdAt
+        updatedAt
+      }
+      user {
+        name
+        email
+        phone
+        sub
+        locs {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      locationSubsId
+      userLocsId
+    }
+  }
+`;
+export const onUpdateLocationUser = /* GraphQL */ `
+  subscription OnUpdateLocationUser(
+    $filter: ModelSubscriptionLocationUserFilterInput
+  ) {
+    onUpdateLocationUser(filter: $filter) {
+      id
+      authType
+      location_id
+      user_id
+      location {
+        locNick
+        locName
+        subs {
+          nextToken
+        }
+        zoneName
+        addr1
+        addr2
+        city
+        zip
+        email
+        phone
+        createdAt
+        updatedAt
+      }
+      user {
+        name
+        email
+        phone
+        sub
+        locs {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      locationSubsId
+      userLocsId
+    }
+  }
+`;
+export const onDeleteLocationUser = /* GraphQL */ `
+  subscription OnDeleteLocationUser(
+    $filter: ModelSubscriptionLocationUserFilterInput
+  ) {
+    onDeleteLocationUser(filter: $filter) {
+      id
+      authType
+      location_id
+      user_id
+      location {
+        locNick
+        locName
+        subs {
+          nextToken
+        }
+        zoneName
+        addr1
+        addr2
+        city
+        zip
+        email
+        phone
+        createdAt
+        updatedAt
+      }
+      user {
+        name
+        email
+        phone
+        sub
+        locs {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      locationSubsId
+      userLocsId
     }
   }
 `;
@@ -176,126 +323,6 @@ export const onDeleteRequest = /* GraphQL */ `
       id
       name
       loc
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateLocationUser = /* GraphQL */ `
-  subscription OnCreateLocationUser(
-    $filter: ModelSubscriptionLocationUserFilterInput
-  ) {
-    onCreateLocationUser(filter: $filter) {
-      id
-      locationID
-      userID
-      location {
-        locNick
-        locName
-        subs {
-          nextToken
-        }
-        zoneName
-        addr1
-        addr2
-        city
-        zip
-        email
-        phone
-        createdAt
-        updatedAt
-      }
-      user {
-        name
-        email
-        phone
-        sub
-        locs {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateLocationUser = /* GraphQL */ `
-  subscription OnUpdateLocationUser(
-    $filter: ModelSubscriptionLocationUserFilterInput
-  ) {
-    onUpdateLocationUser(filter: $filter) {
-      id
-      locationID
-      userID
-      location {
-        locNick
-        locName
-        subs {
-          nextToken
-        }
-        zoneName
-        addr1
-        addr2
-        city
-        zip
-        email
-        phone
-        createdAt
-        updatedAt
-      }
-      user {
-        name
-        email
-        phone
-        sub
-        locs {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteLocationUser = /* GraphQL */ `
-  subscription OnDeleteLocationUser(
-    $filter: ModelSubscriptionLocationUserFilterInput
-  ) {
-    onDeleteLocationUser(filter: $filter) {
-      id
-      locationID
-      userID
-      location {
-        locNick
-        locName
-        subs {
-          nextToken
-        }
-        zoneName
-        addr1
-        addr2
-        city
-        zip
-        email
-        phone
-        createdAt
-        updatedAt
-      }
-      user {
-        name
-        email
-        phone
-        sub
-        locs {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
       createdAt
       updatedAt
     }

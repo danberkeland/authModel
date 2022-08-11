@@ -9,10 +9,13 @@ export const getLocation = /* GraphQL */ `
       subs {
         items {
           id
-          locationID
-          userID
+          authType
+          location_id
+          user_id
           createdAt
           updatedAt
+          locationSubsId
+          userLocsId
         }
         nextToken
       }
@@ -73,10 +76,13 @@ export const getUser = /* GraphQL */ `
       locs {
         items {
           id
-          locationID
-          userID
+          authType
+          location_id
+          user_id
           createdAt
           updatedAt
+          locationSubsId
+          userLocsId
         }
         nextToken
       }
@@ -115,41 +121,13 @@ export const listUsers = /* GraphQL */ `
     }
   }
 `;
-export const getRequest = /* GraphQL */ `
-  query GetRequest($id: ID!) {
-    getRequest(id: $id) {
-      id
-      name
-      loc
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listRequests = /* GraphQL */ `
-  query ListRequests(
-    $filter: ModelRequestFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listRequests(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        loc
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
 export const getLocationUser = /* GraphQL */ `
   query GetLocationUser($id: ID!) {
     getLocationUser(id: $id) {
       id
-      locationID
-      userID
+      authType
+      location_id
+      user_id
       location {
         locNick
         locName
@@ -179,6 +157,8 @@ export const getLocationUser = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      locationSubsId
+      userLocsId
     }
   }
 `;
@@ -191,8 +171,9 @@ export const listLocationUsers = /* GraphQL */ `
     listLocationUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        locationID
-        userID
+        authType
+        location_id
+        user_id
         location {
           locNick
           locName
@@ -214,6 +195,37 @@ export const listLocationUsers = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        createdAt
+        updatedAt
+        locationSubsId
+        userLocsId
+      }
+      nextToken
+    }
+  }
+`;
+export const getRequest = /* GraphQL */ `
+  query GetRequest($id: ID!) {
+    getRequest(id: $id) {
+      id
+      name
+      loc
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listRequests = /* GraphQL */ `
+  query ListRequests(
+    $filter: ModelRequestFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listRequests(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        loc
         createdAt
         updatedAt
       }

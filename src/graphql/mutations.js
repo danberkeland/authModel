@@ -12,10 +12,13 @@ export const createLocation = /* GraphQL */ `
       subs {
         items {
           id
-          locationID
-          userID
+          authType
+          location_id
+          user_id
           createdAt
           updatedAt
+          locationSubsId
+          userLocsId
         }
         nextToken
       }
@@ -42,10 +45,13 @@ export const updateLocation = /* GraphQL */ `
       subs {
         items {
           id
-          locationID
-          userID
+          authType
+          location_id
+          user_id
           createdAt
           updatedAt
+          locationSubsId
+          userLocsId
         }
         nextToken
       }
@@ -72,10 +78,13 @@ export const deleteLocation = /* GraphQL */ `
       subs {
         items {
           id
-          locationID
-          userID
+          authType
+          location_id
+          user_id
           createdAt
           updatedAt
+          locationSubsId
+          userLocsId
         }
         nextToken
       }
@@ -104,10 +113,13 @@ export const createUser = /* GraphQL */ `
       locs {
         items {
           id
-          locationID
-          userID
+          authType
+          location_id
+          user_id
           createdAt
           updatedAt
+          locationSubsId
+          userLocsId
         }
         nextToken
       }
@@ -129,10 +141,13 @@ export const updateUser = /* GraphQL */ `
       locs {
         items {
           id
-          locationID
-          userID
+          authType
+          location_id
+          user_id
           createdAt
           updatedAt
+          locationSubsId
+          userLocsId
         }
         nextToken
       }
@@ -154,15 +169,150 @@ export const deleteUser = /* GraphQL */ `
       locs {
         items {
           id
-          locationID
-          userID
+          authType
+          location_id
+          user_id
           createdAt
           updatedAt
+          locationSubsId
+          userLocsId
         }
         nextToken
       }
       createdAt
       updatedAt
+    }
+  }
+`;
+export const createLocationUser = /* GraphQL */ `
+  mutation CreateLocationUser(
+    $input: CreateLocationUserInput!
+    $condition: ModelLocationUserConditionInput
+  ) {
+    createLocationUser(input: $input, condition: $condition) {
+      id
+      authType
+      location_id
+      user_id
+      location {
+        locNick
+        locName
+        subs {
+          nextToken
+        }
+        zoneName
+        addr1
+        addr2
+        city
+        zip
+        email
+        phone
+        createdAt
+        updatedAt
+      }
+      user {
+        name
+        email
+        phone
+        sub
+        locs {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      locationSubsId
+      userLocsId
+    }
+  }
+`;
+export const updateLocationUser = /* GraphQL */ `
+  mutation UpdateLocationUser(
+    $input: UpdateLocationUserInput!
+    $condition: ModelLocationUserConditionInput
+  ) {
+    updateLocationUser(input: $input, condition: $condition) {
+      id
+      authType
+      location_id
+      user_id
+      location {
+        locNick
+        locName
+        subs {
+          nextToken
+        }
+        zoneName
+        addr1
+        addr2
+        city
+        zip
+        email
+        phone
+        createdAt
+        updatedAt
+      }
+      user {
+        name
+        email
+        phone
+        sub
+        locs {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      locationSubsId
+      userLocsId
+    }
+  }
+`;
+export const deleteLocationUser = /* GraphQL */ `
+  mutation DeleteLocationUser(
+    $input: DeleteLocationUserInput!
+    $condition: ModelLocationUserConditionInput
+  ) {
+    deleteLocationUser(input: $input, condition: $condition) {
+      id
+      authType
+      location_id
+      user_id
+      location {
+        locNick
+        locName
+        subs {
+          nextToken
+        }
+        zoneName
+        addr1
+        addr2
+        city
+        zip
+        email
+        phone
+        createdAt
+        updatedAt
+      }
+      user {
+        name
+        email
+        phone
+        sub
+        locs {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      locationSubsId
+      userLocsId
     }
   }
 `;
@@ -203,129 +353,6 @@ export const deleteRequest = /* GraphQL */ `
       id
       name
       loc
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createLocationUser = /* GraphQL */ `
-  mutation CreateLocationUser(
-    $input: CreateLocationUserInput!
-    $condition: ModelLocationUserConditionInput
-  ) {
-    createLocationUser(input: $input, condition: $condition) {
-      id
-      locationID
-      userID
-      location {
-        locNick
-        locName
-        subs {
-          nextToken
-        }
-        zoneName
-        addr1
-        addr2
-        city
-        zip
-        email
-        phone
-        createdAt
-        updatedAt
-      }
-      user {
-        name
-        email
-        phone
-        sub
-        locs {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateLocationUser = /* GraphQL */ `
-  mutation UpdateLocationUser(
-    $input: UpdateLocationUserInput!
-    $condition: ModelLocationUserConditionInput
-  ) {
-    updateLocationUser(input: $input, condition: $condition) {
-      id
-      locationID
-      userID
-      location {
-        locNick
-        locName
-        subs {
-          nextToken
-        }
-        zoneName
-        addr1
-        addr2
-        city
-        zip
-        email
-        phone
-        createdAt
-        updatedAt
-      }
-      user {
-        name
-        email
-        phone
-        sub
-        locs {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteLocationUser = /* GraphQL */ `
-  mutation DeleteLocationUser(
-    $input: DeleteLocationUserInput!
-    $condition: ModelLocationUserConditionInput
-  ) {
-    deleteLocationUser(input: $input, condition: $condition) {
-      id
-      locationID
-      userID
-      location {
-        locNick
-        locName
-        subs {
-          nextToken
-        }
-        zoneName
-        addr1
-        addr2
-        city
-        zip
-        email
-        phone
-        createdAt
-        updatedAt
-      }
-      user {
-        name
-        email
-        phone
-        sub
-        locs {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
       createdAt
       updatedAt
     }

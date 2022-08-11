@@ -18,14 +18,12 @@ type Location2 @model {
 }
 
 type LocationUser
-  @model
-  @key(name: "byLocation", fields: ["locationID", "userID"])
-  @key(name: "byUser", fields: ["userID", "locationID"]) {
+  @model {
   id: ID!
   locationID: ID!
   userID: ID!
-  post: Location2! @connection(fields: ["locationID"])
-  editor: User2! @connection(fields: ["userID"])
+  location: Location2! @connection(fields: ["locationID"])
+  user: User2! @connection(fields: ["userID"])
   authType: Int
 }
 

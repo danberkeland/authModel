@@ -2,12 +2,13 @@
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
-} # FOR TESTING ONLY!
+} # FOR TESTING ONLY! 
 
-type Location2 @model {
+
+type Location @model {
   locNick: String! @primaryKey
   locName: String!
-  subs: [LocationUser] @connection(keyName: "byLoction", fields: ["locNick"])
+  subs: [User] @manyToMany(relationName: "LocationUser")
   zoneName: String
   addr1: String
   addr2: String
@@ -15,26 +16,16 @@ type Location2 @model {
   zip: String
   email: String
   phone: String
+  
 }
 
-type LocationUser
-  @model {
-  id: ID!
-  locationID: ID!
-  userID: ID!
-  location: Location2! @connection(fields: ["locationID"])
-  user: User2! @connection(fields: ["userID"])
-  authType: Int
-}
-
-type User2 @model {
+type User @model {
   name: String!
   email: String!
   phone: String
   sub: String! @primaryKey
-  locs: [LocationUser] @connection(keyName: "User", fields: ["sub"])
+  locs: [Location] @manyToMany(relationName: "LocationUser")
 }
-
 
 type Request @model {
   id: ID!

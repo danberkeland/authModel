@@ -4,11 +4,10 @@ input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 } # FOR TESTING ONLY!
 
-
-type Location @model {
+type Location2 @model {
   locNick: String! @primaryKey
   locName: String!
-  subs: [User] @manyToMany(relationName: "LocationUser")
+  subs: [LocationUser] @connection(keyName: "byLoction", fields: ["locNick"])
   zoneName: String
   addr1: String
   addr2: String
@@ -16,16 +15,28 @@ type Location @model {
   zip: String
   email: String
   phone: String
-  
 }
 
-type User @model {
+type LocationUser
+  @model
+  @key(name: "byLocation", fields: ["locationID", "userID"])
+  @key(name: "byUser", fields: ["userID", "locationID"]) {
+  id: ID!
+  locationID: ID!
+  userID: ID!
+  post: Location2! @connection(fields: ["locationID"])
+  editor: User2! @connection(fields: ["userID"])
+  authType: Int
+}
+
+type User2 @model {
   name: String!
   email: String!
   phone: String
   sub: String! @primaryKey
-  locs: [Location] @manyToMany(relationName: "LocationUser")
+  locs: [LocationUser] @connection(keyName: "User", fields: ["sub"])
 }
+
 
 type Request @model {
   id: ID!
